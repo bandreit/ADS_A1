@@ -3,15 +3,23 @@ import java.util.ArrayList;
 public class Client {
 
     private Token token;
-
     private CalculatorVisitor calculatorVisitor;
 
-    private Stack stack;
+    public Client()
+    {
+        calculatorVisitor = new CalculatorVisitor();
+    }
 
-    private LinkedStack linkedStack;
+    public int evaluateExpression(ArrayList<Token> tokenList) throws MalformedExpressionException, EmptyListException {
+        for (Token token : tokenList) {
+            if (token instanceof Operand) {
+                calculatorVisitor.visit((Operand) token);
+            } else {
+                calculatorVisitor.visit((Operator) token);
+            }
+        }
 
-    public int evaluateExpression(ArrayList<Token> tokenList) {
-        return 0;
+        return calculatorVisitor.getResult();
     }
 
 }

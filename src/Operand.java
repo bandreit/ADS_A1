@@ -4,11 +4,19 @@ public class Operand extends Token {
 
     private CalculatorVisitor calculatorVisitor;
 
-    public void accept(CalculatorVisitor visitor) {
+    public Operand() {
+        this.value = 0;
+    }
 
+    public void accept(CalculatorVisitor visitor) {
+        visitor.visit(this);
     }
 
     public int getValue() {
-        return 0;
+        return value;
+    }
+
+    public void setValue(int value) {
+        this.value = value;
     }
 }

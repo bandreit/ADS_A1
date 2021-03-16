@@ -1,24 +1,89 @@
-import org.junit.Before;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static junit.framework.TestCase.*;
+import static org.junit.jupiter.api.Assertions.*;
 
-public class LinkedListTest {
+class LinkedListTest {
 
     private LinkedList<Integer> linkedList;
+    private Object EmptyListException;
 
     @BeforeEach
-    public void setUp(){
-        linkedList = new LinkedList<Integer>();
+    void setUp() {
+        this.linkedList = new LinkedList<Integer>();
+        System.out.println("New test starts ->  ");
+        this.EmptyListException = new EmptyListException("List is empty");
+    }
+
+    @AfterEach
+    void tearDown() {
+        System.out.println("Test ended");
     }
 
     @Test
-    public void testAddToFront() {
+    void addToFrontOne() {
+        assertTrue(linkedList.isEmpty());
+        linkedList.addToFront(69);
+        assertFalse(linkedList.isEmpty());
+    }
+
+    @Test
+    void addToFrontMany() {
         assertTrue(linkedList.isEmpty());
         linkedList.addToFront(69);
         linkedList.addToFront(69);
-        assertEquals(2, linkedList.size());
+        linkedList.addToFront(69);
+        assertEquals(3, linkedList.size());
         assertFalse(linkedList.isEmpty());
+    }
+
+    @Test
+    void addToFrontBoundary () {
+        assertTrue(linkedList.isEmpty());
+        linkedList.addToFront(69);
+        assertEquals(1, linkedList.size());
+        assertFalse(linkedList.isEmpty());
+
+        linkedList.addToFront(69);
+        linkedList.addToFront(69);
+        assertEquals(3, linkedList.size());
+        assertFalse(linkedList.isEmpty());
+    }
+
+
+    @Test
+    void isEmpty() {
+        assertTrue(linkedList.isEmpty());
+        linkedList.addToFront(69);
+        linkedList.addToFront(69);
+        assertFalse(linkedList.isEmpty());
+    }
+
+    @Test
+    void size() {
+        linkedList.addToFront(69);
+        linkedList.addToFront(69);
+        assertEquals(2, linkedList.size());
+    }
+
+    @Test
+    void removeFirst() {
+        linkedList.addToFront(69);
+        linkedList.addToFront(69);
+        try {
+            linkedList.removeFirst();
+        } catch (EmptyListException e) {
+            e.printStackTrace();
+        }
+        assertEquals(1, linkedList.size());
+    }
+
+    @Test
+    void removeFirstException() throws EmptyListException {
+        Assertions.assertThrows(EmptyListException.class, () -> {
+            linkedList.removeFirst();
+        });
     }
 }
