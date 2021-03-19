@@ -1,7 +1,6 @@
 public class Operand extends Token {
 
     private int value;
-
     private CalculatorVisitor calculatorVisitor;
 
     public Operand(int value) {
