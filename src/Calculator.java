@@ -1,3 +1,3 @@
 public interface Calculator {
-    public abstract int getResult() throws MalformedExpressionException;
+    public abstract int getResult() throws MalformedExpressionException, EmptyListException;
 }

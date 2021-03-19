@@ -19,7 +19,7 @@ public class LinkedStack<T> implements Stack<T> {
     }
 
     @Override
-    public T pop() throws EmptyStackException, EmptyListException {
+    public T pop() throws EmptyListException {
         return list.removeFirst();
     }
 }

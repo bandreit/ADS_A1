@@ -1,4 +1,5 @@
 public interface List<T> {
+
     public boolean isEmpty();
 
     public int size();
