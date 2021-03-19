@@ -7,13 +7,12 @@ import static org.junit.jupiter.api.Assertions.*;
 class NodeTest {
 
     Operand operand;
-    Node node;
+    Node<Object> node;
 
     @BeforeEach
     void setUp() {
         System.out.println("New test starts ->  ");
-        this.operand = new Operand();
-        this.node = new Node(operand);
+        this.node = new Node<>(operand);
     }
 
     @AfterEach
@@ -46,7 +45,7 @@ class NodeTest {
     void setNext() {
         System.out.println("setNext");
         node.setData(3);
-        Node node1 = new Node(5);
+        Node<Object> node1 = new Node<>(5);
         node.setNext(node1);
         assertEquals(5,node.getNext().getData());
     }
@@ -55,7 +54,7 @@ class NodeTest {
     void getNext() {
         System.out.println("getNext");
         node.setData(3);
-        Node node1 = new Node(5);
+        Node<Object> node1 = new Node<Object>(5);
         node.setNext(node1);
         assertEquals(5,node.getNext().getData());
     }

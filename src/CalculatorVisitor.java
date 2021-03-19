@@ -19,16 +19,25 @@ public class CalculatorVisitor implements Visitor, Calculator {
             Operand operand1 = (Operand) tokenStack.pop();
             Operand operand2 = (Operand) tokenStack.pop();
 
+            int result = 0;
             switch (operator.getOperation()) {
-                case MULTIPLY : operand1.setValue(operand2.getValue() * operand1.getValue());
-                case PLUS : operand1.setValue(operand2.getValue() + operand1.getValue());
-                case MINUS : operand1.setValue(operand2.getValue() - operand1.getValue());
-                case DIVIDE : operand1.setValue(operand2.getValue() / operand1.getValue());
+                case MULTIPLY:
+                    result = operand2.getValue() * operand1.getValue();
+                    break;
+                case PLUS:
+                    result = operand2.getValue() + operand1.getValue();
+                    break;
+                case MINUS:
+                    result = operand2.getValue() - operand1.getValue();
+                    break;
+                case DIVIDE:
+                    result = operand2.getValue() / operand1.getValue();
+                    break;
             }
-            pushOperand(operand1);
-        }
-        catch (EmptyStackException | EmptyListException e)
-        {
+
+            Operand operandToPush = new Operand(result);
+            pushOperand(operandToPush);
+        } catch (EmptyStackException | EmptyListException e) {
             throw new MalformedExpressionException("MalformedExpressionException");
         }
     }
@@ -42,16 +51,12 @@ public class CalculatorVisitor implements Visitor, Calculator {
     }
 
     public int getResult() throws MalformedExpressionException, EmptyListException {
-        if(tokenStack.isEmpty())
-        {
+        if (tokenStack.isEmpty()) {
             throw new MalformedExpressionException("MalformedExpressionException");
         }
         Operand operand = (Operand) tokenStack.pop();
 
-        // Caroci e interesanta idea de a controla inaite si , Johnny malates,
-        // imi place, dar daca asa si trebuie ap ok
-        if(!tokenStack.isEmpty())
-        {
+        if (!tokenStack.isEmpty()) {
             throw new MalformedExpressionException("MalformedExpressionException");
         }
         return operand.getValue();

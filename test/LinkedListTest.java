@@ -8,13 +8,11 @@ import static org.junit.jupiter.api.Assertions.*;
 class LinkedListTest {
 
     private LinkedList<Integer> linkedList;
-    private Object EmptyListException;
 
     @BeforeEach
     void setUp() {
         this.linkedList = new LinkedList<Integer>();
         System.out.println("New test starts ->  ");
-        this.EmptyListException = new EmptyListException("List is empty");
     }
 
     @AfterEach
@@ -81,7 +79,7 @@ class LinkedListTest {
     }
 
     @Test
-    void removeFirstException() throws EmptyListException {
+    void removeFirstException() {
         Assertions.assertThrows(EmptyListException.class, () -> {
             linkedList.removeFirst();
         });

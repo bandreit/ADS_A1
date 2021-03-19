@@ -22,13 +22,13 @@ class LinkedStackTest {
 
     @Test
     void isEmpty() {
-        assertEquals(true,stack.isEmpty());
+        assertTrue(stack.isEmpty());
     }
 
     @Test
     void isNotEmpty() {
         stack.push("opa");
-        assertEquals(false,stack.isEmpty());
+        assertFalse(stack.isEmpty());
     }
 
     @Test
