@@ -19,20 +19,57 @@ public class ClientTest {
     }
 
     @Test
-    void evaluateExpression() throws MalformedExpressionException, EmptyListException {
+    void evaluateExpressionWithOneOperator() throws MalformedExpressionException, EmptyListException {
         tokenArrayList.add(new Operand(3));
         tokenArrayList.add(new Operand(7));
         tokenArrayList.add(new Operator(Operation.MULTIPLY));
-        tokenArrayList.add(new Operand(2));
-        tokenArrayList.add(new Operator(Operation.DIVIDE));
-        tokenArrayList.add(new Operator(Operation.PLUS));
 
-//        Assertions.assertThrows(MalformedExpressionException.class, () -> {
-//            client.evaluateExpression(tokenArrayList);
-//        });
-
-
-        assertEquals(17, client.evaluateExpression(tokenArrayList));
+        assertEquals(21, client.evaluateExpression(tokenArrayList));
     }
 
+    @Test
+    void evaluateExpressionWithMultipleOperators() throws MalformedExpressionException, EmptyListException {
+        tokenArrayList.add(new Operand(4));
+        tokenArrayList.add(new Operand(7));
+        tokenArrayList.add(new Operand(2));
+        tokenArrayList.add(new Operator(Operation.PLUS));
+        tokenArrayList.add(new Operator(Operation.MULTIPLY));
+
+        assertEquals(36, client.evaluateExpression(tokenArrayList));
+    }
+
+
+    @Test
+    void evaluateMalformedExpressionMissingOneOperator() {
+        tokenArrayList.add(new Operand(4));
+        tokenArrayList.add(new Operand(7));
+        tokenArrayList.add(new Operand(2));
+        tokenArrayList.add(new Operator(Operation.PLUS));
+
+        assertThrows(MalformedExpressionException.class,()->{
+            client.evaluateExpression(tokenArrayList);
+        });
+    }
+
+    @Test
+    void evaluateMalformedExpressionMissingOperators() {
+        tokenArrayList.add(new Operand(4));
+        tokenArrayList.add(new Operand(7));
+        tokenArrayList.add(new Operand(7));
+
+        assertThrows(MalformedExpressionException.class,()->{
+            client.evaluateExpression(tokenArrayList);
+        });
+    }
+
+    @Test
+    void evaluateMalformedExpressionMissingOperands() {
+        tokenArrayList.add(new Operand(4));
+        tokenArrayList.add(new Operand(7));
+        tokenArrayList.add(new Operand(7));
+
+        assertThrows(MalformedExpressionException.class,()->{
+            client.evaluateExpression(tokenArrayList);
+        });
+    }
 }

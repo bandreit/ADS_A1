@@ -12,19 +12,14 @@ class LinkedListTest {
     @BeforeEach
     void setUp() {
         this.linkedList = new LinkedList<Integer>();
-        System.out.println("New test starts ->  ");
-    }
-
-    @AfterEach
-    void tearDown() {
-        System.out.println("Test ended");
     }
 
     @Test
-    void addToFrontOne() {
+    void addToFrontOne() throws EmptyListException {
         assertTrue(linkedList.isEmpty());
         linkedList.addToFront(69);
         assertFalse(linkedList.isEmpty());
+        assertEquals(linkedList.removeFirst(), 69);
     }
 
     @Test
