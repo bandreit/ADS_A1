@@ -31,7 +31,6 @@ public class ClientTest {
 //            client.evaluateExpression(tokenArrayList);
 //        });
 
-
         assertEquals(17, client.evaluateExpression(tokenArrayList));
     }
 
